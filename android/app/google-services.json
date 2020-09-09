@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "47695608825",
+    "firebase_url": "https://true-doc.firebaseio.com",
+    "project_id": "true-doc",
+    "storage_bucket": "true-doc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47695608825:android:7f37984170fb9152801b28",
+        "android_client_info": {
+          "package_name": "com.tekh.true_doc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47695608825-nu3fs82dpc8i05lvhe41idghaolfc2gs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzP28iowQKWnqC3_Bj6ybDE5VftPbynRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47695608825-nu3fs82dpc8i05lvhe41idghaolfc2gs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "47695608825-fbqjfdqoduok39ba2ea7043onh2fdum9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tekh.true-doc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
