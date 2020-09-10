@@ -12,10 +12,13 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   var _isLogin = true;
+  var _tryingToSubmit = false;
   final _formKey = GlobalKey<FormState>();
   final _authData = {
     'email': '',
     'password': '',
+    'firstName': '',
+    'lastName': '',
   };
   final _emailValidator = MultiValidator([
     RequiredValidator(errorText: 'Email is required'),
@@ -31,13 +34,19 @@ class _LoginFormState extends State<LoginForm> {
   );
 
   void _trySubmit() {
+    setState(() {
+      _tryingToSubmit = true;
+    });
     if (!_formKey.currentState.validate()) {
+      _tryingToSubmit = false;
       return;
     }
     _formKey.currentState.save();
     Provider.of<Auth>(context, listen: false).authenticate(
       _authData['email'],
       _authData['password'],
+      _authData['firstName'],
+      _authData['lastName'],
       _isLogin,
     );
     // TODO: push credentials to db
@@ -47,6 +56,9 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final buttonTextSize = screenSize.height * 0.025;
+    final firstNameFocus = FocusNode();
+    final lastNameFocus = FocusNode();
+    final passwordFocus = FocusNode();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.10),
       child: Form(
@@ -67,40 +79,89 @@ class _LoginFormState extends State<LoginForm> {
               },
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context)
+                    .requestFocus(_isLogin ? passwordFocus : firstNameFocus);
+              },
             ),
-            SizedBox(height: screenSize.height * 0.05),
+            SizedBox(
+                height: _isLogin
+                    ? screenSize.height * 0.05
+                    : screenSize.height * 0.01),
+            if (!_isLogin)
+              TextFormField(
+                key: ValueKey('firstName'),
+                focusNode: firstNameFocus,
+                decoration: InputDecoration(hintText: 'First Name'),
+                validator:
+                    RequiredValidator(errorText: 'First name is required'),
+                onSaved: (firstName) {
+                  _authData['firstName'] = firstName;
+                },
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(lastNameFocus);
+                },
+              ),
+            if (!_isLogin) SizedBox(height: screenSize.height * 0.01),
+            if (!_isLogin)
+              TextFormField(
+                key: ValueKey('lastName'),
+                focusNode: lastNameFocus,
+                decoration: InputDecoration(hintText: 'Last Name'),
+                validator:
+                    RequiredValidator(errorText: 'Last name is required'),
+                onSaved: (lastName) {
+                  _authData['lastName'] = lastName;
+                },
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(passwordFocus);
+                },
+              ),
+            if (!_isLogin)
+              SizedBox(
+                  height: _isLogin
+                      ? screenSize.height * 0.05
+                      : screenSize.height * 0.01),
             TextFormField(
               key: ValueKey('password'),
+              focusNode: passwordFocus,
               decoration: InputDecoration(hintText: 'Password'),
               validator: _passwordValidator,
               onSaved: (password) {
                 _authData['password'] = password;
               },
               obscureText: true,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
             ),
             SizedBox(height: screenSize.height * 0.09),
-            RaisedButton(
-              child: Text(
-                _isLogin ? StringConstants.logIn : StringConstants.signUp,
-                style: TextStyle(fontSize: buttonTextSize),
-              ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              onPressed: _trySubmit,
-              padding: EdgeInsets.symmetric(
-                vertical: buttonTextSize * 0.8,
-                horizontal: buttonTextSize,
-              ),
-            ),
+            _tryingToSubmit
+                ? Center(child: CircularProgressIndicator())
+                : RaisedButton(
+                    child: Text(
+                      _isLogin ? StringConstants.logIn : StringConstants.signUp,
+                      style: TextStyle(fontSize: buttonTextSize),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    onPressed: _trySubmit,
+                    padding: EdgeInsets.symmetric(
+                      vertical: buttonTextSize * 0.8,
+                      horizontal: buttonTextSize,
+                    ),
+                  ),
             SizedBox(height: screenSize.height * 0.01),
             Container(
               alignment: Alignment.center,
               width: screenSize.width * 0.5,
               child: FlatButton(
-                child: Text(_isLogin
-                    ? StringConstants.signUpPrompt
-                    : StringConstants.logInPrompt, textAlign: TextAlign.center,),
+                child: Text(
+                  _isLogin
+                      ? StringConstants.signUpPrompt
+                      : StringConstants.logInPrompt,
+                  textAlign: TextAlign.center,
+                ),
                 onPressed: () {
                   setState(() {
                     _isLogin = !_isLogin;
