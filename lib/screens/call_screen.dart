@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../constants/strings_constants.dart';
 import '../providers/auth.dart';
+import '../widgets/forms/call_form.dart';
 
 class CallScreen extends StatefulWidget {
   @override
@@ -25,7 +26,12 @@ class _CallScreenState extends State<CallScreen> {
           ),
         ],
       ),
-      // body: ,
+      body: Column(
+        children: [
+          CallForm(),
+        ],
+      ),
+      resizeToAvoidBottomPadding: false,
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import './constants/app_colors.dart';
 import './providers/auth.dart';
+import './screens/call_screen.dart';
 import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (snapshot.hasData)
-              return HomeScreen(); //MeetingScreen(); // return home screen
+              return CallScreen(); //MeetingScreen(); // return home screen
             else
               return LoginScreen();
           },
