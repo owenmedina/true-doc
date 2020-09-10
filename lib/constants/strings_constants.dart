@@ -22,5 +22,6 @@ class StringConstants {
   // Meeting Screen
   static const meetingScreenTitle = 'Join a Meeting';
   static const channelNameHint = 'Channel Name';
+  static const displayNameHint = 'Display Name';
   static const joinMeeting = 'Join Meeting';
 }
