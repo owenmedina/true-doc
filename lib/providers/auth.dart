@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -46,7 +47,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> authenticate(
-      String email, String password, bool isLogin) async {
+      String email, String password, String firstName, String lastName, bool isLogin) async {
     var status;
     try {
       UserCredential userCredential;
@@ -56,6 +57,22 @@ class Auth with ChangeNotifier {
       } else {
         userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
+
+        try {
+          FirebaseFirestore.instance.collection('users').doc(userCredential.user.uid).set({
+            'email': email,
+            'firstName': firstName,
+            'lastName': lastName,
+          });
+        } catch (e) {
+          print('Error adding new user to Firestore collection users: $e');
+        }
+        // FirebaseFirestore.instance.collection;
+        // instance.collection('users').document(authResult.user.uid).setData({
+        //   'username': username,
+        //   'email': email,
+        //   'image_url': url,
+        // });
       }
 
       if (userCredential.user != null)
