@@ -1,4 +1,4 @@
-package com.example.recipe
+package com.tekh.true_doc
 
 import io.flutter.embedding.android.FlutterActivity
 
