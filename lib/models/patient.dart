@@ -1,14 +1,13 @@
-import 'package:flutter/foundation.dart';
-
 import './app_user.dart';
 import './medication.dart';
+import './physician.dart';
 
 class Patient extends AppUser {
   DateTime dob;
   double height;
   double weight;
   String primaryPhysicianId;
-  List<String> physicians; // list of physicians that work with this patient
+  List<Physician> physicians; // list of physicians that work with this patient
   List<String> conditions;
   List<PatientMedication> medications;
 

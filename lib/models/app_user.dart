@@ -14,4 +14,4 @@ class AppUser {
   });
 }
 
-enum UserType { patient, doctor, nurse }
+enum UserType { patient, physician, nurse }
