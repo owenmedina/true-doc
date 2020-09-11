@@ -19,9 +19,10 @@ class StringConstants {
   // Home Screen
   static const homeScreenTitle = 'Home';
 
-  // Meeting Screen
-  static const meetingScreenTitle = 'Join a Meeting';
+  // Call Screen
+  static const callScreenTitle = 'Make a Call';
   static const channelNameHint = 'Channel Name';
   static const displayNameHint = 'Display Name';
-  static const joinMeeting = 'Join Meeting';
+  static const recipientHint = 'Recipient';
+  static const startCall = 'Start Call';
 }

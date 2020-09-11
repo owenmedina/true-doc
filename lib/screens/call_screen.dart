@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jitsi_meet/feature_flag/feature_flag_enum.dart';
 import 'package:jitsi_meet/jitsi_meeting_listener.dart';
-import 'package:provider/provider.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 
 import '../constants/strings_constants.dart';
-import '../providers/auth.dart';
+import '../models/app_user.dart';
+import '../services/auth.dart';
+import '../services/calls.dart';
 import '../widgets/forms/call_form.dart';
 
 class CallScreen extends StatefulWidget {
@@ -17,8 +18,9 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
-  String _roomText = 'test';
+  String _roomText;
   String _userDisplayName;
+  AppUser _callee;
   @override
   void initState() {
     super.initState();
@@ -84,7 +86,7 @@ class _CallScreenState extends State<CallScreen> {
         ..featureFlags.addAll(featureFlags);
       print('JitsiMeetingOptions: $options');
 
-      await JitsiMeet.joinMeeting(
+      final response = await JitsiMeet.joinMeeting(
         options,
         listener: JitsiMeetingListener(
           onConferenceWillJoin: ({message}) {
@@ -105,14 +107,22 @@ class _CallScreenState extends State<CallScreen> {
           },
         ),
       );
+
+      if (response.isSuccess) {
+        final currentUserId = Auth().currentUserId;
+        final physicianId = _callee.type == UserType.doctor ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
+        final patientId = _callee.type == UserType.patient ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
+        Calls().createCall(physicianId, patientId);
+      }
     } catch (e) {
       print('Caught error in call_screen._joinMeeting(): $e');
     }
   }
 
-  void _submitHandler(String channelName, String displayName) {
+  void _submitHandler(String channelName, String displayName, AppUser callee) {
     _roomText = channelName;
     _userDisplayName = displayName;
+    _callee = callee;
     print('Entered _submitHandler() with _roomText: ${_roomText} and _userDisplayName: ${_userDisplayName}');
     _joinMeeting();
   }
@@ -122,12 +132,12 @@ class _CallScreenState extends State<CallScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(StringConstants.meetingScreenTitle),
+        title: Text(StringConstants.callScreenTitle),
         actions: [
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () {
-              Provider.of<Auth>(context, listen: false).logout();
+              Auth().logout();
             },
           ),
         ],

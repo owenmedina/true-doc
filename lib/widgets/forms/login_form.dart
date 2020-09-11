@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:provider/provider.dart';
 
 import '../../constants/strings_constants.dart';
-import '../../providers/auth.dart';
+import '../../services/auth.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -45,7 +44,7 @@ class _LoginFormState extends State<LoginForm> {
       return;
     }
     _formKey.currentState.save();
-    Provider.of<Auth>(context, listen: false).authenticate(
+    Auth().authenticate(
       _authData['email'],
       _authData['password'],
       _authData['firstName'],

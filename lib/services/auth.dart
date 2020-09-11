@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../constants/strings_constants.dart';
 
-class Auth with ChangeNotifier {
+class Auth {
   String handleFirebaseAuthException(e) {
     var status;
     switch (e.code) {
@@ -46,8 +45,8 @@ class Auth with ChangeNotifier {
     return status;
   }
 
-  Future<String> authenticate(
-      String email, String password, String firstName, String lastName, bool isLogin) async {
+  Future<String> authenticate(String email, String password, String firstName,
+      String lastName, bool isLogin) async {
     var status;
     try {
       UserCredential userCredential;
@@ -59,20 +58,18 @@ class Auth with ChangeNotifier {
             .createUserWithEmailAndPassword(email: email, password: password);
 
         try {
-          FirebaseFirestore.instance.collection('users').doc(userCredential.user.uid).set({
+          FirebaseFirestore.instance
+              .collection('patients')
+              .doc(userCredential.user.uid)
+              .set({
             'email': email,
             'firstName': firstName,
             'lastName': lastName,
+            'type': 'patient',
           });
         } catch (e) {
           print('Error adding new user to Firestore collection users: $e');
         }
-        // FirebaseFirestore.instance.collection;
-        // instance.collection('users').document(authResult.user.uid).setData({
-        //   'username': username,
-        //   'email': email,
-        //   'image_url': url,
-        // });
       }
 
       if (userCredential.user != null)
@@ -81,16 +78,28 @@ class Auth with ChangeNotifier {
         status = StringConstants.undefined;
     } on FirebaseAuthException catch (e) {
       status = handleFirebaseAuthException(e);
+      throw e;
     } catch (e) {
       status = StringConstants.undefined;
       print('Unknown error: ${e.toString()}');
+      throw e;
     }
     return status;
   }
 
   Future<void> logout() async {
-    print('Attempting to log out');
-    await FirebaseAuth.instance.signOut();
-    print('Successfully logged out');
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      print('Caught error in auth.logout(): $e');
+      throw e;
+    }
+  }
+
+  String get currentUserId {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return FirebaseAuth.instance.currentUser.uid;
+    } else
+      return null;
   }
 }
