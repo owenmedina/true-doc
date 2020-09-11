@@ -20,6 +20,9 @@ class _LoginFormState extends State<LoginForm> {
     'firstName': '',
     'lastName': '',
   };
+  final firstNameFocus = FocusNode();
+  final lastNameFocus = FocusNode();
+  final passwordFocus = FocusNode();
   final _emailValidator = MultiValidator([
     RequiredValidator(errorText: 'Email is required'),
     EmailValidator(errorText: 'Please enter a valid email'),
@@ -56,9 +59,6 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final buttonTextSize = screenSize.height * 0.025;
-    final firstNameFocus = FocusNode();
-    final lastNameFocus = FocusNode();
-    final passwordFocus = FocusNode();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.10),
       child: Form(
