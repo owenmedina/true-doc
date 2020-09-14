@@ -9,7 +9,6 @@ class Physician extends AppUser {
   DateTime dob;
   Gender gender;
   List<Specialty> specialties;
-  String primaryPhysicianId;
   List<Patient> patients; // list of patients that work with this physician
 
   Physician({
@@ -17,6 +16,8 @@ class Physician extends AppUser {
     firstName,
     lastName,
     this.dob,
+    this.gender,
+    this.specialties,
     this.patients,
     // qualifications
   }) : super(id: id, firstName: firstName, lastName: lastName, type: UserType.physician);

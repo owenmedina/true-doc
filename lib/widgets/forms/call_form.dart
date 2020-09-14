@@ -3,7 +3,10 @@ import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../constants/strings_constants.dart';
 import '../../models/app_user.dart';
+import '../../models/physician.dart' as Physician;
+import '../../models/specialty.dart';
 import '../../services/patient.dart';
+import '../../services/physician.dart';
 
 class CallForm extends StatefulWidget {
   final Function onSubmit;
@@ -25,6 +28,7 @@ class _CallFormState extends State<CallForm> {
   final _calleeFocus = FocusNode();
   var _tryingToSubmit = false;
   var _selectedRecipient;
+  final List<Physician.Physician> physicians = Patient().getPhysicians(); // test
 
   void _submit() {
     setState(() {
@@ -49,7 +53,8 @@ class _CallFormState extends State<CallForm> {
 
   @override
   Widget build(BuildContext context) {
-    Patient().getPhysicians();
+    print('Testing physicians content'); // test
+    physicians.forEach((element) { print(element.lastName);}); //test
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top -
@@ -95,7 +100,19 @@ class _CallFormState extends State<CallForm> {
               hint: Text(StringConstants.recipientHint),
               value: _selectedRecipient,
               focusNode: _calleeFocus,
-              items: [],
+              items: physicians
+                  .map((phy) => DropdownMenuItem(
+                        child: Column(
+                          children: [
+                            Text('${phy.firstName} ${phy.lastName}'),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: phy.specialties.map<Widget>((spec) => Text(SpecialtyHelper.specialtyToString(spec))).toList(),
+                            ),
+                          ],
+                        ),
+                      ))
+                  .toList(),
               onChanged: (AppUser value) {
                 setState(() {
                   _selectedRecipient = value;

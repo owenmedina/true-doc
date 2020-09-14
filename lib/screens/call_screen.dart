@@ -123,7 +123,7 @@ class _CallScreenState extends State<CallScreen> {
     _roomText = channelName;
     _userDisplayName = displayName;
     _callee = callee;
-    print('Entered _submitHandler() with _roomText: ${_roomText} and _userDisplayName: ${_userDisplayName}');
+    print('Entered _submitHandler() with _roomText: $_roomText and _userDisplayName: $_userDisplayName');
     _joinMeeting();
   }
 
