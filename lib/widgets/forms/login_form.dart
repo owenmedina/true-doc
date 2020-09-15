@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:provider/provider.dart';
 
-import '../../constants/strings_constants.dart';
-import '../../providers/auth.dart';
+import '../../services/auth.dart';
+import '../../utilities/constants/strings_constants.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -20,6 +19,9 @@ class _LoginFormState extends State<LoginForm> {
     'firstName': '',
     'lastName': '',
   };
+  final firstNameFocus = FocusNode();
+  final lastNameFocus = FocusNode();
+  final passwordFocus = FocusNode();
   final _emailValidator = MultiValidator([
     RequiredValidator(errorText: 'Email is required'),
     EmailValidator(errorText: 'Please enter a valid email'),
@@ -42,7 +44,7 @@ class _LoginFormState extends State<LoginForm> {
       return;
     }
     _formKey.currentState.save();
-    Provider.of<Auth>(context, listen: false).authenticate(
+    Auth.authenticate(
       _authData['email'],
       _authData['password'],
       _authData['firstName'],
@@ -56,9 +58,6 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final buttonTextSize = screenSize.height * 0.025;
-    final firstNameFocus = FocusNode();
-    final lastNameFocus = FocusNode();
-    final passwordFocus = FocusNode();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.10),
       child: Form(

@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
-import './constants/app_colors.dart';
-import './providers/auth.dart';
+import './providers/physicians.dart';
+import './screens/call_screen.dart';
 import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
 import './screens/meeting_screen.dart';
 import './screens/splash_screen.dart';
+import './utilities/constants/app_colors.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => Auth()),
+        ChangeNotifierProvider(create: (_) => Physicians()),
       ],
       child: MaterialApp(
         title: 'true doc',
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (snapshot.hasData)
-              return HomeScreen(); //MeetingScreen(); // return home screen
+              return CallScreen(); //MeetingScreen(); // return home screen
             else
               return LoginScreen();
           },
