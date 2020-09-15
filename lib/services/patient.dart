@@ -7,24 +7,4 @@ import '../models/physician.dart' as Physician;
 import '../models/specialty.dart';
 
 class Patient {
-  //List<AppUser> 
-  List<Physician.Physician> getPhysicians() {
-    final currentUserId = Auth().currentUserId;
-    List<Physician.Physician> physicians = [];
-    FirebaseFirestore.instance.collection('patients').doc(currentUserId).collection('physicians').get().then((data) {
-      print('Physicians for user {$currentUserId}: ');
-      data.docs.forEach((dataElement) { 
-        print(dataElement.id);
-        final newPhysician = PhysicianService.Physician().getPhysicianById(dataElement.id);
-        print('New physician in getPhysicians: ${newPhysician.lastName}');
-        physicians.add(newPhysician);
-        print('current physician contents: $physicians');
-      });
-      return physicians;
-    }).catchError((e) {
-      print('Caught error in patient.getPhysicians(): $e');
-      throw e;
-    });
-    return null;
-  }
 }

@@ -6,10 +6,10 @@ import 'package:jitsi_meet/feature_flag/feature_flag_enum.dart';
 import 'package:jitsi_meet/jitsi_meeting_listener.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 
-import '../constants/strings_constants.dart';
 import '../models/app_user.dart';
 import '../services/auth.dart';
 import '../services/calls.dart';
+import '../utilities/constants/strings_constants.dart';
 import '../widgets/forms/call_form.dart';
 
 class CallScreen extends StatefulWidget {
@@ -109,7 +109,7 @@ class _CallScreenState extends State<CallScreen> {
       );
 
       if (response.isSuccess) {
-        final currentUserId = Auth().currentUserId;
+        final currentUserId = Auth.currentUserId;
         final physicianId = _callee.type == UserType.physician ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
         final patientId = _callee.type == UserType.patient ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
         Calls().createCall(physicianId, patientId);
@@ -137,7 +137,7 @@ class _CallScreenState extends State<CallScreen> {
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () {
-              Auth().logout();
+              Auth.logout();
             },
           ),
         ],

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../constants/strings_constants.dart';
+import '../utilities/constants/strings_constants.dart';
 
 class Auth {
-  String handleFirebaseAuthException(e) {
+  static String _handleFirebaseAuthException(e) {
     var status;
     switch (e.code) {
       case 'ERROR_INVALID_EMAIL':
@@ -45,7 +45,7 @@ class Auth {
     return status;
   }
 
-  Future<String> authenticate(String email, String password, String firstName,
+  static Future<String> authenticate(String email, String password, String firstName,
       String lastName, bool isLogin) async {
     var status;
     try {
@@ -77,7 +77,7 @@ class Auth {
       else
         status = StringConstants.undefined;
     } on FirebaseAuthException catch (e) {
-      status = handleFirebaseAuthException(e);
+      status = _handleFirebaseAuthException(e);
       throw e;
     } catch (e) {
       status = StringConstants.undefined;
@@ -87,7 +87,7 @@ class Auth {
     return status;
   }
 
-  Future<void> logout() async {
+  static Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
     } catch (e) {
@@ -96,7 +96,7 @@ class Auth {
     }
   }
 
-  String get currentUserId {
+  static String get currentUserId {
     if (FirebaseAuth.instance.currentUser != null) {
       return FirebaseAuth.instance.currentUser.uid;
     } else

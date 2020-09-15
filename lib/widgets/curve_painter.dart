@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/app_colors.dart';
+import '../utilities/constants/app_colors.dart';
 
 class CurvePainter extends CustomPainter {
   @override
