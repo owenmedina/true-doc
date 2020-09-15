@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import './providers/physicians.dart';
 import './screens/call_screen.dart';
+import './screens/chat_list_screen.dart';
 import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
@@ -76,7 +77,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (snapshot.hasData)
-              return CallScreen(); //MeetingScreen(); // return home screen
+              return ChatListScreen(); //MeetingScreen(); // return home screen
             else
               return LoginScreen();
           },
