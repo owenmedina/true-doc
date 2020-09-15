@@ -1,6 +1,6 @@
 enum Gender {
-  male,
-  female,
-  nonbinary,
-  undefined,
+  Male,
+  Female,
+  Nonbinary,
+  Undefined,
 }
