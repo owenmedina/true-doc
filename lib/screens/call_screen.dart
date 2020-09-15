@@ -21,6 +21,7 @@ class _CallScreenState extends State<CallScreen> {
   String _roomText;
   String _userDisplayName;
   AppUser _callee;
+  String _callId;
   @override
   void initState() {
     super.initState();
@@ -100,6 +101,7 @@ class _CallScreenState extends State<CallScreen> {
           onConferenceTerminated: ({message}) {
             print(
                 'Single meeting onConferenceTerminated. \n${options.room} will join with message: $message');
+            Calls.endCall(_callId);
           },
           onError: (message) {
             print(
@@ -108,11 +110,14 @@ class _CallScreenState extends State<CallScreen> {
         ),
       );
 
+      print('Response success: ${response.isSuccess}');
+
       if (response.isSuccess) {
         final currentUserId = Auth.currentUserId;
         final physicianId = _callee.type == UserType.physician ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
         final patientId = _callee.type == UserType.patient ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
-        Calls().createCall(physicianId, patientId);
+        _callId = await Calls.createCall(physicianId, patientId);
+        print('_callId: $_callId');
       }
     } catch (e) {
       print('Caught error in call_screen._joinMeeting(): $e');

@@ -1,4 +1,4 @@
-
+import 'package:flutter/foundation.dart';
 
 import './app_user.dart';
 import './gender.dart';
@@ -12,12 +12,12 @@ class Physician extends AppUser {
   List<Patient> patients; // list of patients that work with this physician
 
   Physician({
-    id,
-    firstName,
-    lastName,
+    @required id,
+    @required firstName,
+    @required lastName,
     this.dob,
     this.gender,
-    this.specialties,
+    @required this.specialties,
     this.patients,
     // qualifications
   }) : super(id: id, firstName: firstName, lastName: lastName, type: UserType.physician);

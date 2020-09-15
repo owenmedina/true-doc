@@ -19,10 +19,10 @@ class CallForm extends StatefulWidget {
 
 class _CallFormState extends State<CallForm> {
   final _formKey = GlobalKey<FormState>();
-  final _meetingData = {
+  final Map<String, dynamic> _meetingData = {
     'channelName': '',
     'displayName': '',
-    'callee': '',
+    'callee': null,
   };
   final _displayNameFocus = FocusNode();
   final _calleeFocus = FocusNode();
@@ -128,7 +128,8 @@ class _CallFormState extends State<CallForm> {
                         setState(() {
                           _selectedRecipient = value;
                         });
-                        _meetingData['callee'] = value.id;
+                        _meetingData['callee'] = value;
+                        print('Callee value: ${_meetingData['callee']}');
                       },
                     ),
                   ),

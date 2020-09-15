@@ -48,6 +48,7 @@ class Physicians with ChangeNotifier {
             .map((e) => SpecialtyUtility.stringToSpecialty(e))
             .toList();
         final newPhysician = Physician(
+          id: doc.id,
           lastName: doc.data()['lastName'],
           firstName: doc.data()['firstName'],
           specialties: specialties,
