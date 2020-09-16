@@ -6,7 +6,7 @@ import '../../models/app_user.dart';
 import '../../models/physician.dart';
 import '../../providers/physicians.dart';
 import '../../utilities/specialty_utility.dart';
-import '../../utilities/constants/strings_constants.dart';
+import '../../utilities/constants/string_constants.dart';
 
 class CallForm extends StatefulWidget {
   final Function onSubmit;
@@ -71,10 +71,10 @@ class _CallFormState extends State<CallForm> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
-        kToolbarHeight;
+        MediaQuery.of(context).padding.top - AppBar().preferredSize.height -
+        kToolbarHeight - MediaQuery.of(context).padding.bottom;
     return Container(
-      height: screenHeight * 0.90,
+      height: screenHeight * 0.95,
       width: screenWidth,
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(

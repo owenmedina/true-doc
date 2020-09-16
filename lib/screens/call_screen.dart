@@ -9,10 +9,11 @@ import 'package:jitsi_meet/jitsi_meet.dart';
 import '../models/app_user.dart';
 import '../services/auth.dart';
 import '../services/calls.dart';
-import '../utilities/constants/strings_constants.dart';
+import '../utilities/constants/string_constants.dart';
 import '../widgets/forms/call_form.dart';
 
 class CallScreen extends StatefulWidget {
+  static const routeName = '/call';
   @override
   _CallScreenState createState() => _CallScreenState();
 }
@@ -114,8 +115,12 @@ class _CallScreenState extends State<CallScreen> {
 
       if (response.isSuccess) {
         final currentUserId = Auth.currentUserId;
-        final physicianId = _callee.type == UserType.physician ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
-        final patientId = _callee.type == UserType.patient ? _callee.id : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
+        final physicianId = _callee.type == UserType.physician
+            ? _callee.id
+            : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
+        final patientId = _callee.type == UserType.patient
+            ? _callee.id
+            : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
         _callId = await Calls.createCall(physicianId, patientId);
         print('_callId: $_callId');
       }
@@ -128,31 +133,17 @@ class _CallScreenState extends State<CallScreen> {
     _roomText = channelName;
     _userDisplayName = displayName;
     _callee = callee;
-    print('Entered _submitHandler() with _roomText: $_roomText and _userDisplayName: $_userDisplayName');
+    print(
+        'Entered _submitHandler() with _roomText: $_roomText and _userDisplayName: $_userDisplayName');
     _joinMeeting();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(StringConstants.callScreenTitle),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: () {
-              Auth.logout();
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          CallForm(_submitHandler),
-        ],
-      ),
-      resizeToAvoidBottomPadding: false,
+    return Column(
+      children: [
+        CallForm(_submitHandler),
+      ],
     );
   }
 }

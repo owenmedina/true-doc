@@ -5,11 +5,14 @@ import 'package:provider/provider.dart';
 
 import './providers/physicians.dart';
 import './screens/call_screen.dart';
+import './screens/chat_list_screen.dart';
 import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
 import './screens/meeting_screen.dart';
+import './screens/profile_screen.dart';
 import './screens/splash_screen.dart';
+import './screens/tabs_screen.dart';
 import './utilities/constants/app_colors.dart';
 
 void main() async {
@@ -60,6 +63,11 @@ class MyApp extends StatelessWidget {
             buttonColor: AppColors.darkBlue,
           ),
         ),
+        routes: {
+          CallScreen.routeName: (ctx) => CallScreen(),
+          ChatListScreen.routeName: (ctx) => ChatListScreen(),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(),
+        },
         home: StreamBuilder(
           // Initialize FlutterFire:
           stream: FirebaseAuth.instance.authStateChanges(),
@@ -76,7 +84,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (snapshot.hasData)
-              return CallScreen(); //MeetingScreen(); // return home screen
+              return TabsScreen();//ChatListScreen(); //MeetingScreen(); // return home screen
             else
               return LoginScreen();
           },
