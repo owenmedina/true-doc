@@ -56,6 +56,11 @@ flutter:
     - assets/illustrations/home.png
     - assets/illustrations/appointment.png
     - assets/illustrations/messages.png
+    - assets/illustrations/profile.png
+    - assets/illustrations/active-home.png
+    - assets/illustrations/active-appointment.png
+    - assets/illustrations/active-messages.png
+    - assets/illustrations/active-profile.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

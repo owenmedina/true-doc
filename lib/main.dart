@@ -10,6 +10,7 @@ import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
 import './screens/meeting_screen.dart';
+import './screens/profile_screen.dart';
 import './screens/splash_screen.dart';
 import './utilities/constants/app_colors.dart';
 
@@ -61,6 +62,11 @@ class MyApp extends StatelessWidget {
             buttonColor: AppColors.darkBlue,
           ),
         ),
+        routes: {
+          CallScreen.routeName: (ctx) => CallScreen(),
+          ChatListScreen.routeName: (ctx) => ChatListScreen(),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(),
+        },
         home: StreamBuilder(
           // Initialize FlutterFire:
           stream: FirebaseAuth.instance.authStateChanges(),

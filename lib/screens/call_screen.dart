@@ -13,6 +13,7 @@ import '../utilities/constants/strings_constants.dart';
 import '../widgets/forms/call_form.dart';
 
 class CallScreen extends StatefulWidget {
+  static const routeName = '/call';
   @override
   _CallScreenState createState() => _CallScreenState();
 }
