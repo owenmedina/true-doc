@@ -10,8 +10,12 @@ class AppUser {
     @required this.id,
     @required this.firstName,
     @required this.lastName,
-    @required this.type,
+    this.type,
   });
 }
 
-enum UserType { patient, physician, nurse }
+enum UserType {
+  Patient,
+  Physician,
+  Nurse,
+}

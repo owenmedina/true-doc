@@ -9,6 +9,9 @@ class StringConstants {
   static const tooManyRequests = 'Too many requests being sent. Please try again later.';
   static const operationNotAllowed = 'Operation is not allowed';
 
+  // Bottom Navigation Bar
+  static const conversationsNavBarTitle = 'Conversations';
+
   // Login Screen
   static const logIn = 'Log In';
   static const signUp = 'Sign Up';
@@ -25,4 +28,7 @@ class StringConstants {
   static const displayNameHint = 'Display Name';
   static const recipientHint = 'Recipient';
   static const startCall = 'Start Call';
+
+  // Conversations Screen
+  static const conversationsScreenTitle = 'Conversations';
 }

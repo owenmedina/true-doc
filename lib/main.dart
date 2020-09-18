@@ -4,8 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
 import './providers/physicians.dart';
+import './providers/conversations.dart';
 import './screens/call_screen.dart';
-import './screens/chat_list_screen.dart';
+import './screens/conversations_screen.dart';
 import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Physicians()),
+        ChangeNotifierProvider(create: (_) => Conversations()),
       ],
       child: MaterialApp(
         title: 'true doc',
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
           // the app on. For desktop platforms, the controls will be smaller and
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          backgroundColor: Colors.grey[200],
           fontFamily: 'Kumbh-Sans',
           // Define the default TextTheme. Use this to specify the default
           // text styling for headlines, titles, bodies of text, and more.
@@ -65,7 +68,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           CallScreen.routeName: (ctx) => CallScreen(),
-          ChatListScreen.routeName: (ctx) => ChatListScreen(),
+          ConversationsScreen.routeName: (ctx) => ConversationsScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
         },
         home: StreamBuilder(
@@ -84,7 +87,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (snapshot.hasData)
-              return TabsScreen();//ChatListScreen(); //MeetingScreen(); // return home screen
+              return TabsScreen();//ConversationsScreen(); //MeetingScreen(); // return home screen
             else
               return LoginScreen();
           },

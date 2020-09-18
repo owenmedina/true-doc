@@ -79,14 +79,6 @@ class Physicians with ChangeNotifier {
         physiciansList.add(newPhysician);
       }
       _physicians = physiciansList;
-      // physiciansData.docs.forEach((physiciansDatum) async {
-      //   final newPhysician = await getPhysicianById(physiciansDatum.id);
-      //   physiciansList.add(newPhysician);
-      // });
-      // physiciansList = physiciansData.docs.map((pId) async {
-      //   await getPhysicianById(pId.id).then((value) => value);
-      // });
-      // _physicians = physiciansList;
       notifyListeners();
       print('physicians contents after getPhysicians: $physiciansList');
     } catch (e) {

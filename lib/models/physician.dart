@@ -20,5 +20,5 @@ class Physician extends AppUser {
     @required this.specialties,
     this.patients,
     // qualifications
-  }) : super(id: id, firstName: firstName, lastName: lastName, type: UserType.physician);
+  }) : super(id: id, firstName: firstName, lastName: lastName, type: UserType.Physician);
 }
