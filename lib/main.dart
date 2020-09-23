@@ -12,6 +12,7 @@ import './screens/error_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
 import './screens/meeting_screen.dart';
+import './screens/messages_screen.dart';
 import './screens/profile_screen.dart';
 import './screens/splash_screen.dart';
 import './screens/tabs_screen.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
           CallScreen.routeName: (ctx) => CallScreen(),
           ConversationsScreen.routeName: (ctx) => ConversationsScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
+          MessagesScreen.routeName: (ctx) => MessagesScreen(),
         },
         home: StreamBuilder(
           // Initialize FlutterFire:
