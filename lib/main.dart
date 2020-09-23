@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
+import './models/conversation.dart';
 import './providers/physicians.dart';
 import './providers/conversations.dart';
 import './screens/call_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Physicians()),
         ChangeNotifierProvider(create: (_) => Conversations()),
+        StreamProvider<List<Conversation>>(create: (_) => Conversations().streamConversations(), initialData: [],)
       ],
       child: MaterialApp(
         title: 'true doc',

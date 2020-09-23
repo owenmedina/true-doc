@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './call_screen.dart';
-import 'conversations_screen.dart';
+import './conversations_screen.dart';
 import './home_screen.dart';
 import './profile_screen.dart';
 import '../services/auth.dart';

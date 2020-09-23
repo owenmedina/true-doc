@@ -21,7 +21,7 @@ class User with ChangeNotifier {
       final userDoc = await userRef.get();
       if (userDoc.exists) {
         if (userDoc.data()['type'] == 'patient') {
-          
+
           _user = Patient(id: Auth.currentUserId, firstName: null, lastName: null);
         }
         // final specialties = (doc.data()['specialties'] as List<dynamic>)

@@ -3,91 +3,129 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:async/async.dart' show StreamGroup;
 
 import '../models/conversation.dart';
+import '../models/message.dart';
 import '../services/auth.dart';
 
 class Conversations with ChangeNotifier {
-  List<Conversation> _conversations = [];
+  // final currentUserId = Auth.currentUserId;
+  // Map<String, dynamic> _conversations = {};
+  // Map<String, dynamic> _messages = {};
+  // List<Conversation> _conversationsList = [];
+  // List<String> _conversationsIds = [];
+  // List<Conversation> get conversationsList {
+  //   return [..._conversationsList];
+  // }
 
-  List<Conversation> get conversations {
-    return [..._conversations];
+  // void fetchAndSetConversations() {
+  //   // To create an OR query, must combine two where queries
+  //   final List<Conversation> updatedConversationsList = [];
+  //   try {
+  //     FirebaseFirestore.instance
+  //         .collection('conversations')
+  //         .where('members', arrayContains: Auth.currentUserId)
+  //         .orderBy('dateActive', descending: true)
+  //         .snapshots().listen((event) {
+  //           for(final document in event.docs) {
+  //             updatedConversationsList.add(Conversation.fromDocument(document));
+  //           }
+  //         });
+  //     _conversationsList = updatedConversationsList;
+  //     print('fetched and set conversations');
+  //   } catch (e) {
+  //     print(
+  //         'Caught error in conversations.fetchAndSetConversations(): $e');
+  //   }
+  // }
+
+  Stream<List<Conversation>> streamConversations() {
+    var ref = FirebaseFirestore.instance
+          .collection('conversations')
+          .where('members', arrayContains: Auth.currentUserId)
+          .orderBy('dateActive', descending: true);
+
+    return ref.snapshots().map((list) =>
+        list.docs.map((doc) => Conversation.fromDocument(doc)).toList());
+    
   }
 
-  Future<void> fetchAndSetConversations() async {
-    final currentUserId = Auth.currentUserId;
-    final conversationsCollection =
-        FirebaseFirestore.instance.collection('conversations');
+  // void _setMessages(DocumentSnapshot conv) {
+  //   try {
+  //     // Use document snapshot to get the reference so you're able to get the messages subcollection
+  //     List<Message> messagesList = [];
+  //      conv.reference.collection('messages').snapshots().listen((event) {
+  //       print('Event size: ${event.size}');
+  //       print('Messages for conversation#${conv.id}');
+  //       for (QueryDocumentSnapshot doc in event.docs) {
+  //         print('Message#${doc.id}: ${doc.data()}');
+  //         final newMessage = Message.fromDocument(doc);
+  //         print('newMessage: $newMessage');
+  //         messagesList.add(newMessage);
+  //         print('messagesList: $messagesList');
+  //       }
+  //       print(
+  //           'Length of messagesList for conv#${conv.id}: ${messagesList.length}');
 
-    // To create an OR query, must combine two where queries
-    try {
-      final firstQuery = conversationsCollection
-          .where('user1', isEqualTo: currentUserId)
-          .snapshots()
-          .listen((convSnapshot) {
-        final convs = convSnapshot.docs;
-        _updateConversations(convs);
-      });
-    } catch (e) {
-      print(
-          'Caught error in first query of conversations.fetchAndSetConversations(): $e');
-    }
+  //       messagesList.sort((m1, m2) => m2.date.compareTo(m1.date));
 
-    try {
-      final secondQuery = conversationsCollection
-          .where('user2', isEqualTo: currentUserId)
-          .snapshots()
-          .listen((convSnapshot) {
-        final convs = convSnapshot.docs;
-        _updateConversations(convs);
-      });
-    } catch (e) {
-      print(
-          'Caught error in second query of conversations.fetchAndSetConversations(): $e');
-    }
+  //       //print('Last message of Conversation ${conv.id}: ${messagesList.last}');
+  //       _messages[conv.id] = messagesList;
+  //       notifyListeners();
+  //     });
 
-    // conversationsStreams.add(firstQuery);
-    // conversationsStreams.add(secondQuery);
-    // // Merge streams into one stream
-    // Stream<QuerySnapshot> results = StreamGroup.merge(conversationsStreams);
-    // var i = 1; // test
-    // await for (QuerySnapshot convSnapshot in results) {
-    //   print('Iteration ${i++} of ${results.length}');
-    //   convSnapshot.docs.forEach((conv) {
-    //     print('Conv data: ${conv.data()}');
-    //   });
-    // }
-  }
+  //     // .orderBy('date', descending: true)
+  //     // .limit(1)
+  //     // .get();
 
-  Future<Map<String, dynamic>> _getLastMessage(
-      QueryDocumentSnapshot conv) async {
-    try {
-      // Use document snapshot to get the reference so you're able to get the messages subcollection
-      // Order by date and limit to 1 to get latest message
-      final messageSnapshot = await conv.reference
-          .collection('messages')
-          .orderBy('date', descending: true)
-          .limit(1)
-          .get();
+  //     //final messageDoc = messageSnapshot.docs[0]; //messageQuery.docs[0].data();
+  //   } catch (e) {
+  //     print('Caught error in conversations._getMessages(): $e');
+  //     throw e;
+  //   }
+  // }
+
+  // void _updateConversationEntry(DocumentChange docChange) {
+  //   _setMessages(docChange.doc);
+  //   Conversation newConversation;
+  //   if (_messages[docChange.doc.id] != null && _messages[docChange.doc.id].isNotEmpty) {
+  //     newConversation = Conversation.fromDocumentChange(
+  //         docChange,
+  //         _messages[docChange.doc.id].last);
+
       
-      final messageDoc =
-          messageSnapshot.docs[0]; //messageQuery.docs[0].data();
-      print('Last message of ${messageDoc.id}: ${messageDoc.data()}');
-      return messageDoc.data();
-    } catch (e) {
-      print('Caught error in conversations._getLastMessage(): $e');
-      throw e;
-    }
-  }
+  //   } else {
+  //     newConversation = Conversation.fromDocumentChangeWithoutMessage(docChange);
+  //   }
+  //   _conversationsIds.add(docChange.doc.id);
+  //     _conversations[docChange.doc.id] = newConversation;
+  //     _conversationsList = _conversations.values.toList().cast<Conversation>();
+  //     _conversationsList
+  //         .sort((c1, c2) => c2.lastMessageDate.compareTo(c1.lastMessageDate));
+  // }
 
-  Future<void> _updateConversations(
-    List<QueryDocumentSnapshot> newConvsSnapshotList) async {
-    List<Conversation> conversationsList = [];
-    print('List of new conversation data:'); // test
-    for (QueryDocumentSnapshot newConvSnapshot in newConvsSnapshotList) {
-      print('${newConvSnapshot.id}: ${newConvSnapshot.data()} \n');
-      final messageMap = await _getLastMessage(newConvSnapshot);
-      conversationsList.add(Conversation.fromLastMessageMap(messageMap));
-    }
-    _conversations = conversationsList;
-    notifyListeners();
-  }
+  // Future<void> _applyConversationsChanges(
+  //     List<DocumentChange> docChangesList) async {
+  //   List<Conversation> conversationsList = [];
+  //   print('List of new conversation data:'); // test
+  //   for (DocumentChange docChange in docChangesList) {
+  //     switch (docChange.type) {
+  //       case DocumentChangeType.added:
+  //         // new conversation
+  //         _updateConversationEntry(docChange);
+  //         notifyListeners();
+  //         break;
+  //       case DocumentChangeType.modified:
+  //         // modified conversation
+  //         _updateConversationEntry(docChange);
+  //         notifyListeners();
+  //         break;
+  //       case DocumentChangeType.removed:
+  //         // removed conversation
+  //         _conversations.remove(docChange.doc.id);
+  //         notifyListeners();
+  //         break;
+  //     }
+
+  //     print('Value: \n $_conversationsList');
+  //   }
+  // }
 }

@@ -8,6 +8,7 @@ class StringConstants {
   static const userDisabled = 'User with these credentials is currently disabled';
   static const tooManyRequests = 'Too many requests being sent. Please try again later.';
   static const operationNotAllowed = 'Operation is not allowed';
+  static const errorOccurred = 'Something went wrong.';
 
   // Bottom Navigation Bar
   static const conversationsNavBarTitle = 'Conversations';
