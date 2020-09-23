@@ -69,7 +69,7 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
           style: TextStyle(fontSize: screenHeight * 0.02),
         ),
         onTap: () {
-          Navigator.pushNamed(context, MessagesScreen.routeName, arguments: []);
+          Navigator.pushNamed(context, MessagesScreen.routeName, arguments: [conversations[i].id, conversations[i].other]);
         },
       ),
     );
