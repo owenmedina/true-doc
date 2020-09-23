@@ -34,7 +34,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Physicians()),
         ChangeNotifierProvider(create: (_) => Conversations()),
-        StreamProvider<List<Conversation>>(create: (_) => Conversations().streamConversations(), initialData: [],)
+        StreamProvider<List<Conversation>>(
+          create: (_) => Conversations().streamConversations(),
+          initialData: Conversations.initialData,
+          catchError: Conversations.catchError,
+        ),
       ],
       child: MaterialApp(
         title: 'true doc',
@@ -89,7 +93,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (snapshot.hasData)
-              return TabsScreen();//ConversationsScreen(); //MeetingScreen(); // return home screen
+              return TabsScreen(); //ConversationsScreen(); //MeetingScreen(); // return home screen
             else
               return LoginScreen();
           },

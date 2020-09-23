@@ -22,11 +22,17 @@ class Conversation {
   });
 
   factory Conversation.fromDocument(QueryDocumentSnapshot document) {
-    Conversation newConversation;
+    Conversation newConversation = Conversation(
+      id: '',
+      lastMessage: '',
+      lastMessageDate: null,
+      other: '',
+    );
     newConversation.id = document.id;
     newConversation.lastMessage = document.data()['messagePreview'];
     newConversation.lastMessageDate = document.data()['dateActive'];
-    newConversation.formattedLastMessageDate = _convertTimeStamp(newConversation.lastMessageDate);
+    newConversation.formattedLastMessageDate =
+        _convertTimeStamp(newConversation.lastMessageDate);
     newConversation.other = document.data()['members'][0] == Auth.currentUserId
         ? document.data()['membersNames'][1]
         : document.data()['membersNames'][0];

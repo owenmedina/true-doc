@@ -7,6 +7,11 @@ import '../models/message.dart';
 import '../services/auth.dart';
 
 class Conversations with ChangeNotifier {
+  static const List<Conversation> initialData = [];
+  static List<Conversation> catchError(BuildContext context, Object error) {
+    print('Caught error when creating StreamProvider<List<Conversation>>: $error');
+    return initialData;
+  }
   // final currentUserId = Auth.currentUserId;
   // Map<String, dynamic> _conversations = {};
   // Map<String, dynamic> _messages = {};
