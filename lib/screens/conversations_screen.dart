@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './messages_screen.dart';
 import '../models/conversation.dart';
 import '../providers/conversations.dart';
 import '../services/auth.dart';
@@ -46,6 +47,7 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
     return ListView.builder(
       itemCount: conversations.length,
       itemBuilder: (listViewCtx, i) => ListTile(
+        key: ValueKey(conversations[i].id),
         leading: CircleAvatar(
           radius: screenHeight * 0.03,
         ),
@@ -66,6 +68,9 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
           conversations[i].lastMessage ?? '',
           style: TextStyle(fontSize: screenHeight * 0.02),
         ),
+        onTap: () {
+          Navigator.pushNamed(context, MessagesScreen.routeName, arguments: []);
+        },
       ),
     );
   }
