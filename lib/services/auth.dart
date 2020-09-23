@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../utilities/constants/strings_constants.dart';
+import '../utilities/constants/string_constants.dart';
 
 class Auth {
   static String _handleFirebaseAuthException(e) {
@@ -45,8 +45,8 @@ class Auth {
     return status;
   }
 
-  static Future<String> authenticate(String email, String password, String firstName,
-      String lastName, bool isLogin) async {
+  static Future<String> authenticate(String email, String password,
+      String firstName, String lastName, bool isLogin) async {
     var status;
     try {
       UserCredential userCredential;
@@ -58,6 +58,12 @@ class Auth {
             .createUserWithEmailAndPassword(email: email, password: password);
 
         try {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(userCredential.user.uid)
+              .set({
+            'type': 'patient',
+          });
           FirebaseFirestore.instance
               .collection('patients')
               .doc(userCredential.user.uid)

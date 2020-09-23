@@ -115,10 +115,10 @@ class _CallScreenState extends State<CallScreen> {
 
       if (response.isSuccess) {
         final currentUserId = Auth.currentUserId;
-        final physicianId = _callee.type == UserType.physician
+        final physicianId = _callee.type == UserType.Physician
             ? _callee.id
             : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
-        final patientId = _callee.type == UserType.patient
+        final patientId = _callee.type == UserType.Patient
             ? _callee.id
             : currentUserId; // TODO: consider setting listen to false in the Provider<Auth>
         _callId = await Calls.createCall(physicianId, patientId);

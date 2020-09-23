@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import './call_screen.dart';
-import './chat_list_screen.dart';
+import './conversations_screen.dart';
 import './home_screen.dart';
 import './profile_screen.dart';
 import '../services/auth.dart';
+import '../utilities/constants/app_colors.dart';
 import '../utilities/constants/numerical_constants.dart';
 import '../utilities/constants/string_constants.dart';
 import '../widgets/app_bars/home_app_bar.dart';
@@ -16,7 +17,8 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   List<Map<String, dynamic>> _pages;
-  var _selectedIndex = 0;
+  var _selectedIndex = 2;
+  var _isInitialized = false;
 
   void _onTapHandler(int index) {
     setState(() {
@@ -25,37 +27,40 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   @override
-  void initState() {
-    _pages = [
-      {
-        'page': HomeScreen(),
-        'appBar': AppBar(title: Text(StringConstants.homeScreenTitle)),
-      },
-      {
-        'page': CallScreen(),
-        'appBar': AppBar(
-          centerTitle: true,
-          title: Text(StringConstants.callScreenTitle),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.exit_to_app),
-              onPressed: () {
-                Auth.logout();
-              },
-            ),
-          ],
-        ),
-      },
-      {
-        'page': ChatListScreen(),
-        'appBar': null,
-      },
-      {
-        'page': ProfileScreen(),
-        'appBar': null,
-      },
-    ];
-    super.initState();
+  void didChangeDependencies() {
+    if (!_isInitialized) {
+      _pages = [
+        {
+          'page': HomeScreen(),
+          'appBar': AppBar(title: Text(StringConstants.homeScreenTitle)),
+        },
+        {
+          'page': CallScreen(),
+          'appBar': AppBar(
+            centerTitle: true,
+            title: Text(StringConstants.callScreenTitle),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  Auth.logout();
+                },
+              ),
+            ],
+          ),
+        },
+        {
+          'page': ConversationsScreen(),
+          'appBar': ConversationsScreen.buildAppBar(context),
+        },
+        {
+          'page': ProfileScreen(),
+          'appBar': null,
+        },
+      ];
+      _isInitialized = true;
+    }
+    super.didChangeDependencies();
   }
 
   @override
@@ -67,7 +72,7 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: _pages[_selectedIndex]['appBar'],
       body: _pages[_selectedIndex]['page'],
       bottomNavigationBar: _buildNavigationBar(screenHeight),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomPadding: false,
     );
   }
@@ -116,7 +121,7 @@ class _TabsScreenState extends State<TabsScreen> {
               'assets/illustrations/active-messages.png',
               height: screenHeight * 0.04,
             ),
-            title: Text('Messages'),
+            title: Text(StringConstants.conversationsNavBarTitle),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(

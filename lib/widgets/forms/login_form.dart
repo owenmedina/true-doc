@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../services/auth.dart';
-import '../../utilities/constants/strings_constants.dart';
+import '../../utilities/constants/string_constants.dart';
 
 class LoginForm extends StatefulWidget {
   @override

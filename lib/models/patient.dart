@@ -14,9 +14,9 @@ class Patient extends AppUser {
   List<PatientMedication> medications;
 
   Patient({
-    id,
-    firstName,
-    lastName,
+    @required id,
+    @required firstName,
+    @required lastName,
     this.dob,
     this.height,
     this.weight,
@@ -24,5 +24,5 @@ class Patient extends AppUser {
     this.physicians,
     this.conditions,
     this.medications,
-  }) : super(id: id, firstName: firstName, lastName: lastName, type: UserType.patient);
+  }) : super(id: id, firstName: firstName, lastName: lastName, type: UserType.Patient);
 }
