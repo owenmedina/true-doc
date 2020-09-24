@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utilities/constants/app_colors.dart';
+import '../widgets/messages_list.dart';
+import '../widgets/inputs/message_input.dart';
 
 class MessagesScreen extends StatelessWidget {
   static const routeName = '/messages';
@@ -11,11 +12,13 @@ class MessagesScreen extends StatelessWidget {
         MediaQuery.of(context).size.height - padding.top - padding.bottom;
     final screenWidth = MediaQuery.of(context).size.width;
     final args = ModalRoute.of(context).settings.arguments as List<dynamic>;
-    String otherId;
+    String conversationId;
     String otherName;
+    String otherId;
     if (args != null) {
-      otherId = args[0];
+      conversationId = args[0];
       otherName = args[1];
+      otherId = args[2];
     }
     return PreferredSize(
       preferredSize: Size.fromHeight(screenHeight * 0.18),
@@ -24,8 +27,8 @@ class MessagesScreen extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black54,
-              blurRadius: 5,
+              color: Colors.black12,
+              blurRadius: 4,
             ),
           ],
         ),
@@ -69,9 +72,24 @@ class MessagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments as List<dynamic>;
+    String conversationId;
+    String otherName;
+    String otherId;
+    if (args != null) {
+      conversationId = args[0];
+      otherName = args[1];
+      otherId = args[2];
+    }
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Center(child: Text('Messages Screen to be completed')),
+      body: Column(
+        children: [
+          MessagesList(),
+          MessageInput(),
+        ],
+      ),
+      resizeToAvoidBottomPadding: true,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/curve_painter.dart';
-import '../widgets/forms/login_form.dart';
+import '../widgets/inputs/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
