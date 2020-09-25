@@ -85,7 +85,7 @@ class MessagesScreen extends StatelessWidget {
       appBar: buildAppBar(context),
       body: Column(
         children: [
-          MessagesList(),
+          MessagesList(conversationId),
           MessageInput(),
         ],
       ),
