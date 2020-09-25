@@ -32,7 +32,7 @@ class Messages {
   }) async {
     try {
       final firestore = FirebaseFirestore.instance;
-      firestore
+      await firestore
           .collection('conversations')
           .doc(conversationId)
           .collection('messages')
@@ -42,7 +42,7 @@ class Messages {
         'sender': senderId,
       });
 
-      firestore.collection('conversations').doc(conversationId).update({
+      await firestore.collection('conversations').doc(conversationId).update({
         'messagePreview': message,
         'dateActive': timestamp,
       });
