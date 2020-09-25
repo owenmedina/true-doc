@@ -32,7 +32,6 @@ class ConversationsScreen extends StatefulWidget {
 }
 
 class _ConversationsScreenState extends State<ConversationsScreen> {
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -64,9 +63,13 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
             )
           ],
         ),
-        subtitle: Text(
-          conversations[i].lastMessage ?? '',
-          style: TextStyle(fontSize: screenHeight * 0.02),
+        subtitle: Container(
+          child: Text(
+            conversations[i].lastMessage ?? '',
+            style: TextStyle(fontSize: screenHeight * 0.02),
+            overflow: TextOverflow.clip,
+            maxLines: 1,
+          ),
         ),
         onTap: () {
           Navigator.pushNamed(context, MessagesScreen.routeName, arguments: []);
