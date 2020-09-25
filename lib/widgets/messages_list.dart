@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './message_bubble.dart';
 import './message_time.dart';
+import './date_divider.dart';
 import '../models/message.dart';
 import '../services/messages.dart';
 
@@ -12,7 +13,6 @@ class MessagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Message> emptyList = [];
     return Flexible(
       child: StreamBuilder(
           stream: Messages().streamMessages(conversationId),
@@ -35,6 +35,12 @@ class MessagesList extends StatelessWidget {
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
+                  if (messages.data[i].fromDifferentDays(
+                      messages.data[i],
+                      i + 1 >= messages.data.length
+                          ? null
+                          : messages.data[i + 1]))
+                    DateDivider(messages.data[i]),
                   MessageBubble(messages.data[i]),
                   MessageTime(messages.data[i]),
                 ],
