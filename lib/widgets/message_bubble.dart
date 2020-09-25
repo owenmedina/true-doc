@@ -27,6 +27,7 @@ class MessageBubble extends StatelessWidget {
         message,
         style: TextStyle(
           fontSize: screenHeight * 0.02,
+          height: screenHeight * 0.0015,
         ),
       ),
       decoration: BoxDecoration(
@@ -43,7 +44,7 @@ class MessageBubble extends StatelessWidget {
         horizontal: screenWidth * 0.05,
       ),
       margin: EdgeInsets.only(
-        top: screenHeight * 0.015,
+        top: screenHeight * 0.007,
         bottom: screenHeight * 0.015,
         left: isMe ? 0 : screenWidth * 0.04,
         right: isMe ? screenWidth * 0.04 : 0,

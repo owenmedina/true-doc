@@ -43,4 +43,12 @@ class Message {
     final formattedString = dateFormatter.format(dateTime);
     return formattedString;
   }
+
+  Map<String, dynamic> toMap(Message message) {
+    return {
+      'date': message.date,
+      'message': message.message,
+      'sender': message.senderId,
+    };
+  }
 }

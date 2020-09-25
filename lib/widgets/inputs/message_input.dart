@@ -1,14 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../utilities/constants/numerical_constants.dart';
+import '../../services/auth.dart';
+import '../../services/messages.dart';
 
 class MessageInput extends StatefulWidget {
+  final conversationId;
+
+  MessageInput(this.conversationId);
+
   @override
   _MessageInputState createState() => _MessageInputState();
 }
 
 class _MessageInputState extends State<MessageInput> {
   final _textEditingController = TextEditingController();
+  var _enteredMessage = '';
+
+  void sendMessage(BuildContext context) {
+    final message = _textEditingController.text;
+    final timestamp = Timestamp.fromDate(DateTime.now());
+    Messages().sendMessage(
+      context: context,
+      conversationId: widget.conversationId,
+      message: message,
+      timestamp: timestamp,
+      senderId: Auth.currentUserId,
+    );
+    _textEditingController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +65,28 @@ class _MessageInputState extends State<MessageInput> {
                 right: screenWidth * 0.050,
                 bottom: screenHeight * 0.010),
             child: TextField(
-              maxLines: null,
-              style: TextStyle(fontSize: screenHeight * 0.024),
+              controller: _textEditingController,
+              onChanged: (newMessage) {
+                setState(() {
+                  _enteredMessage = newMessage;
+                });
+              },
+              style: TextStyle(fontSize: screenHeight * 0.0225),
               decoration: InputDecoration.collapsed(
                 hintText: 'Type here',
                 hintStyle: TextStyle(fontSize: screenHeight * 0.02),
               ),
-              controller: _textEditingController,
+              maxLines: null,
+              textCapitalization: TextCapitalization.sentences,
+              autocorrect: true,
+              enableSuggestions: true,
             ),
           ),
         ),
         IconButton(
           icon: Image.asset('assets/illustrations/send-message.png'),
-          onPressed: () {},
+          onPressed:
+              _enteredMessage.trim().isEmpty ? null : () => sendMessage(context),
         ),
       ]),
     );

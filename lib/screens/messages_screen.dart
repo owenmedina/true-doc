@@ -86,7 +86,7 @@ class MessagesScreen extends StatelessWidget {
       body: Column(
         children: [
           MessagesList(conversationId),
-          MessageInput(),
+          MessageInput(conversationId),
         ],
       ),
       resizeToAvoidBottomPadding: true,

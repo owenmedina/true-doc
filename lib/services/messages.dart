@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/message.dart';
+import '../utilities/utility_functions.dart';
+import '../utilities/constants/string_constants.dart';
 
 class Messages {
   static const List<Message> initialData = [];
@@ -21,26 +23,36 @@ class Messages {
         (list) => list.docs.map((doc) => Message.fromDocument(doc)).toList());
   }
 
-  // Future<void> sendMessage(
-  //     String message, String sender, Timestamp date) async {
-  //   try {
-  //     FirebaseFirestore.instance
-  //         .collection('users')
-  //         .doc(userCredential.user.uid)
-  //         .set({
-  //       'type': 'patient',
-  //     });
-  //     FirebaseFirestore.instance
-  //         .collection('patients')
-  //         .doc(userCredential.user.uid)
-  //         .set({
-  //       'email': email,
-  //       'firstName': firstName,
-  //       'lastName': lastName,
-  //       'type': 'patient',
-  //     });
-  //   } catch (e) {
-  //     print('Error adding new user to Firestore collection users: $e');
-  //   }
-  // }
+  Future<void> sendMessage({
+    @required BuildContext context,
+    @required String conversationId,
+    @required String message,
+    @required Timestamp timestamp,
+    @required String senderId,
+  }) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      firestore
+          .collection('conversations')
+          .doc(conversationId)
+          .collection('messages')
+          .add({
+        'message': message,
+        'date': timestamp,
+        'sender': senderId,
+      });
+
+      firestore.collection('conversations').doc(conversationId).update({
+        'messagePreview': message,
+        'dateActive': timestamp,
+      });
+    } catch (e) {
+      print('Error adding new message to conversation $conversationId: $e');
+      UtilityFunctions.showAdaptiveDialog(
+        context,
+        StringConstants.genericErrorTitle,
+        StringConstants.errorSendingMessage,
+      );
+    }
+  }
 }

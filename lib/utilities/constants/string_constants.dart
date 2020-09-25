@@ -9,6 +9,8 @@ class StringConstants {
   static const tooManyRequests = 'Too many requests being sent. Please try again later.';
   static const operationNotAllowed = 'Operation is not allowed';
   static const errorOccurred = 'Something went wrong.';
+  static const errorSendingMessage = 'Message failed to send. Please try again.';
+  static const genericErrorTitle = "Error";
 
   // Bottom Navigation Bar
   static const conversationsNavBarTitle = 'Conversations';
