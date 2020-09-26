@@ -13,14 +13,30 @@ class Messages {
   }
 
   Stream<List<Message>> streamMessages(String conversationId) {
-    var ref = FirebaseFirestore.instance
+    final firestore = FirebaseFirestore.instance;
+    var ref = firestore
         .collection('conversations')
         .doc(conversationId)
         .collection('messages')
         .orderBy('date', descending: true);
 
-    return ref.snapshots().map(
-        (list) => list.docs.map((doc) => Message.fromDocument(doc)).toList());
+    return ref.snapshots().map((list) => list.docs.map((doc) {
+          var message = Message.fromDocument(doc);
+          if (!message.isMe && !message.isRead) {
+            message.isRead =
+                true; // may be unnecessary if update on document calls snapshots() again anyways
+            firestore
+                .collection('conversations')
+                .doc(conversationId)
+                .collection('messages')
+                .doc(doc.id)
+                .update({
+              'isRead': true,
+              'readAt': Timestamp.fromDate(DateTime.now()),
+            });
+          }
+          return message;
+        }).toList());
   }
 
   Future<void> sendMessage({
@@ -40,6 +56,7 @@ class Messages {
         'message': message,
         'date': timestamp,
         'sender': senderId,
+        'isRead': false,
       });
 
       await firestore.collection('conversations').doc(conversationId).update({

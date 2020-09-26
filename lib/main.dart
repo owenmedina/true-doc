@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Physicians()),
         ChangeNotifierProvider(create: (_) => Conversations()),
-        StreamProvider<List<Conversation>>(
-          create: (_) => Conversations().streamConversations(),
-          initialData: Conversations.initialData,
-          catchError: Conversations.catchError,
-        ),
+        // StreamProvider<List<Conversation>>(
+        //   create: (_) => Conversations().streamConversations(),
+        //   initialData: Conversations.initialData,
+        //   catchError: Conversations.catchError,
+        // ),
       ],
       child: MaterialApp(
         title: 'true doc',

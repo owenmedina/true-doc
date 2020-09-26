@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 import '../services/auth.dart';
+import '../utilities/utility_functions.dart';
 
 class Message {
   String id;
@@ -10,6 +11,8 @@ class Message {
   Timestamp date;
   String formattedTime;
   String senderId;
+  bool isRead;
+  String readAt;
 
   bool get isMe {
     return senderId == Auth.currentUserId;
@@ -20,6 +23,8 @@ class Message {
     @required this.message,
     @required this.date,
     @required this.senderId,
+    @required this.isRead,
+    this.readAt,
   }) {
     this.formattedTime = _timestampToFormattedString(date);
   }
@@ -31,6 +36,12 @@ class Message {
     this.date = data['date'];
     this.formattedTime = _timestampToFormattedString(date);
     this.senderId = data['sender'];
+    this.isRead = data['isRead'];
+    if (data['readAt'] != null) {
+      this.readAt = UtilityFunctions.formatTimestamp(data['readAt']);
+    } else {
+      print('data[\'readAt\'] == null: ${data['readAt'] == null}');
+    }
   }
 
   String toString() {
@@ -55,11 +66,12 @@ class Message {
   bool fromDifferentDays(Message currentMessage, Message messageBelow) {
     if (messageBelow == null) return true;
     final currentMessageDateTime = currentMessage.date.toDate();
-    final currentMessageDate = DateTime(
-        currentMessageDateTime.year, currentMessageDateTime.month, currentMessageDateTime.day);
+    final currentMessageDate = DateTime(currentMessageDateTime.year,
+        currentMessageDateTime.month, currentMessageDateTime.day);
 
     final messageBelowDateTime = messageBelow.date.toDate();
-    final messageBelowDate = DateTime(messageBelowDateTime.year, messageBelowDateTime.month, messageBelowDateTime.day);
+    final messageBelowDate = DateTime(messageBelowDateTime.year,
+        messageBelowDateTime.month, messageBelowDateTime.day);
 
     return currentMessageDate != messageBelowDate;
   }

@@ -31,6 +31,7 @@ class MessagesList extends StatelessWidget {
               reverse: true,
               itemCount: messages.data.length,
               itemBuilder: (listViewCtx, i) => Column(
+                key: ValueKey(messages.data[i].id),
                 crossAxisAlignment: messages.data[i].isMe
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
@@ -42,7 +43,10 @@ class MessagesList extends StatelessWidget {
                           : messages.data[i + 1]))
                     DateDivider(messages.data[i]),
                   MessageBubble(messages.data[i]),
-                  MessageTime(messages.data[i]),
+                  MessageTime(
+                    message: messages.data[i],
+                    isLast: i == 0,
+                  ),
                 ],
               ),
             );

@@ -131,4 +131,8 @@ class Conversation {
     final isAfterEndOfLastWeek = date.isAfter(endOfLastWeek);
     return isBeforeEndOfWeek && isAfterEndOfLastWeek;
   }
+
+  String toString() {
+    return '$id $otherName$otherId: $lastMessage at $lastMessageDate ($formattedLastMessageDate)';
+  }
 }
