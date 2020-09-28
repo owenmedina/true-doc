@@ -2,23 +2,22 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
-import './app_user.dart';
-import './message.dart';
 import '../services/auth.dart';
-import '../utilities/constants/numerical_constants.dart';
 
 class Conversation {
   String id;
   String lastMessage;
   Timestamp lastMessageDate;
   String formattedLastMessageDate;
-  String other;
+  String otherName;
+  String otherId;
 
   Conversation({
     @required this.id,
     @required this.lastMessage,
     @required this.lastMessageDate,
-    @required this.other,
+    @required this.otherName,
+    @required this.otherId,
   });
 
   factory Conversation.fromDocument(QueryDocumentSnapshot document) {
@@ -26,17 +25,25 @@ class Conversation {
       id: '',
       lastMessage: '',
       lastMessageDate: null,
-      other: '',
+      otherName: '',
+      otherId: '',
     );
     newConversation.id = document.id;
     newConversation.lastMessage = document.data()['messagePreview'];
     newConversation.lastMessageDate = document.data()['dateActive'];
     newConversation.formattedLastMessageDate =
         _convertTimeStamp(newConversation.lastMessageDate);
-    newConversation.other = document.data()['members'][0] == Auth.currentUserId
+    newConversation.otherName = document.data()['members'][0] == Auth.currentUserId
         ? document.data()['membersNames'][1]
         : document.data()['membersNames'][0];
+    newConversation.otherId = document.data()['members'][0] == Auth.currentUserId
+        ? document.data()['members'][1]
+        : document.data()['members'][0];
     return newConversation;
+  }
+
+  void setFormattedLastMessageDate(Conversation conversation) {
+    conversation.formattedLastMessageDate = _convertTimeStamp(conversation.lastMessageDate);
   }
 
   // Conversation.fromDocumentChange(
@@ -123,5 +130,9 @@ class Conversation {
     final isBeforeEndOfWeek = date.isBefore(endOfWeek);
     final isAfterEndOfLastWeek = date.isAfter(endOfLastWeek);
     return isBeforeEndOfWeek && isAfterEndOfLastWeek;
+  }
+
+  String toString() {
+    return '$id $otherName$otherId: $lastMessage at $lastMessageDate ($formattedLastMessageDate)';
   }
 }

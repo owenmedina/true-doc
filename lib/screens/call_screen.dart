@@ -10,7 +10,7 @@ import '../models/app_user.dart';
 import '../services/auth.dart';
 import '../services/calls.dart';
 import '../utilities/constants/string_constants.dart';
-import '../widgets/forms/call_form.dart';
+import '../widgets/inputs/call_form.dart';
 
 class CallScreen extends StatefulWidget {
   static const routeName = '/call';

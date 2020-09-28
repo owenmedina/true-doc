@@ -42,39 +42,59 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
     final padding = MediaQuery.of(context).padding;
     final screenHeight =
         MediaQuery.of(context).size.height - padding.top - padding.bottom;
-    final conversations = Provider.of<List<Conversation>>(context);
-    return ListView.builder(
-      itemCount: conversations.length,
-      itemBuilder: (listViewCtx, i) => ListTile(
-        key: ValueKey(conversations[i].id),
-        leading: CircleAvatar(
-          radius: screenHeight * 0.03,
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              conversations[i].other,
-              style: TextStyle(fontSize: screenHeight * 0.025),
+    // final conversations = Provider.of<List<Conversation>>(context);
+    return StreamBuilder<List<Conversation>>(
+      stream: Conversations().streamConversations(),
+      builder: (ctx, AsyncSnapshot<List<Conversation>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasData) {
+          if (snapshot.data.length == 0) {
+            return Center(
+              child: Text('No conversations!'),
+            );
+          }
+          var conversations = snapshot.data;
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (listViewCtx, i) => ListTile(
+              key: ValueKey(conversations[i].id),
+              leading: CircleAvatar(
+                radius: screenHeight * 0.03,
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    conversations[i].otherName ?? '',
+                    style: TextStyle(fontSize: screenHeight * 0.025),
+                  ),
+                  Text(
+                    conversations[i].formattedLastMessageDate ?? '',
+                    style: TextStyle(fontSize: screenHeight * 0.02),
+                  )
+                ],
+              ),
+              subtitle: Text(
+                conversations[i].lastMessage ?? '',
+                style: TextStyle(fontSize: screenHeight * 0.02),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, MessagesScreen.routeName,
+                    arguments: [
+                      conversations[i].id,
+                      conversations[i].otherName,
+                      conversations[i].otherId,
+                    ]);
+              },
             ),
-            Text(
-              conversations[i].formattedLastMessageDate ?? '',
-              style: TextStyle(fontSize: screenHeight * 0.02),
-            )
-          ],
-        ),
-        subtitle: Container(
-          child: Text(
-            conversations[i].lastMessage ?? '',
-            style: TextStyle(fontSize: screenHeight * 0.02),
-            overflow: TextOverflow.clip,
-            maxLines: 1,
-          ),
-        ),
-        onTap: () {
-          Navigator.pushNamed(context, MessagesScreen.routeName, arguments: []);
-        },
-      ),
+          );
+        }
+        return Center(
+          child: Text(StringConstants.errorOccurred),
+        );
+      },
     );
   }
 }
