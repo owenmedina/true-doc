@@ -84,7 +84,7 @@ class _MessageInputState extends State<MessageInput> {
           ),
         ),
         IconButton(
-          icon: Image.asset('assets/illustrations/send-message.png'),
+          icon: Image.asset('assets/illustrations/messages/send-message.png'),
           onPressed:
               _enteredMessage.trim().isEmpty ? null : () => sendMessage(context),
         ),

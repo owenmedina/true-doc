@@ -5,6 +5,7 @@ class AppColors {
   static const mediumBlue = Color.fromRGBO(113, 162, 214, 1);
   static const lightBlue = Color.fromRGBO(135, 180, 225, 1);
   static const faintBlue = Color.fromRGBO(177, 216, 245, 1);
+  static const darkPurple = Color.fromRGBO(52, 2, 117, 1);
 
   static const Map<int, Color> darkBlueColorCodes = {
     50: Color.fromRGBO(71, 126, 194, .1),
@@ -70,5 +71,19 @@ class AppColors {
   static const faintBlueHexCode = 0xFFB1D8F5;
   static const MaterialColor materialFaintBlue = MaterialColor(faintBlueHexCode, faintBlueColorCodes);
 
+  static const Map<int, Color> darkPurpleColorCodes = {
+    50: Color.fromRGBO(177, 216, 245, .1),
+    100: Color.fromRGBO(177, 216, 245, .2),
+    200: Color.fromRGBO(177, 216, 245, .3),
+    300: Color.fromRGBO(177, 216, 245, .4),
+    400: Color.fromRGBO(177, 216, 245, .5),
+    500: Color.fromRGBO(177, 216, 245, .6),
+    600: Color.fromRGBO(177, 216, 245, .7),
+    700: Color.fromRGBO(177, 216, 245, .8),
+    800: Color.fromRGBO(177, 216, 245, .9),
+    900: Color.fromRGBO(177, 216, 245, 1),
+  };
 
+  static const darkPurpleHexCode = 0xFF340275;
+  static const MaterialColor materialdarkPurple = MaterialColor(darkPurpleHexCode, darkPurpleColorCodes);
 }

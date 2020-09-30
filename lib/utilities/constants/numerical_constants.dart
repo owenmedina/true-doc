@@ -1,4 +1,7 @@
 class NumericalConstants {
+  // Dates
+  static const daysInAWeek = 7;
+
   // Bottom Navigation Bar
   static const roundedNavBarRadius = 25.00;
   static const navBarElevation = 12.00;
@@ -6,6 +9,6 @@ class NumericalConstants {
   // Text Inputs
   static const maxTextInputLines = 4;
 
-  // Dates
-  static const daysInAWeek = 7;
+  // Rounded Widgets
+  static const standardBorderRadius = 35.00;
 }

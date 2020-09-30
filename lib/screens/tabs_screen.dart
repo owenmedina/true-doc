@@ -17,7 +17,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   List<Map<String, dynamic>> _pages;
-  var _selectedIndex = 2;
+  var _selectedIndex = 3;
   var _isInitialized = false;
 
   void _onTapHandler(int index) {
@@ -55,7 +55,7 @@ class _TabsScreenState extends State<TabsScreen> {
         },
         {
           'page': ProfileScreen(),
-          'appBar': null,
+          'appBar': ProfileScreen.buildAppBar(context),
         },
       ];
       _isInitialized = true;
@@ -92,44 +92,44 @@ class _TabsScreenState extends State<TabsScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/illustrations/home.png',
+              'assets/illustrations/tabs/home.png',
               height: screenHeight * 0.04,
             ),
             activeIcon: Image.asset(
-              'assets/illustrations/active-home.png',
+              'assets/illustrations/tabs/active-home.png',
               height: screenHeight * 0.04,
             ),
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/illustrations/appointment.png',
+              'assets/illustrations/tabs/appointment.png',
               height: screenHeight * 0.04,
             ),
             activeIcon: Image.asset(
-              'assets/illustrations/active-appointment.png',
+              'assets/illustrations/tabs/active-appointment.png',
               height: screenHeight * 0.04,
             ),
             title: Text('Appointments'),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/illustrations/messages.png',
+              'assets/illustrations/tabs/messages.png',
               height: screenHeight * 0.04,
             ),
             activeIcon: Image.asset(
-              'assets/illustrations/active-messages.png',
+              'assets/illustrations/tabs/active-messages.png',
               height: screenHeight * 0.04,
             ),
             title: Text(StringConstants.conversationsNavBarTitle),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/illustrations/profile.png',
+              'assets/illustrations/tabs/profile.png',
               height: screenHeight * 0.04,
             ),
             activeIcon: Image.asset(
-              'assets/illustrations/active-profile.png',
+              'assets/illustrations/tabs/active-profile.png',
               height: screenHeight * 0.04,
             ),
             title: Text('Profile'),
