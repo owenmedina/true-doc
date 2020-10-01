@@ -56,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         ),
         Tab(
           icon: Image.asset(
-            'assets/illustrations/profile/conditions/virus.png',
+            'assets/illustrations/profile/history/medical-history.png',
             height: screenHeight * 0.04,
           ),
         ),
@@ -72,7 +72,11 @@ class _ProfileScreenState extends State<ProfileScreen>
       //     text: title,
       //   ),
       // ),);
-      tabController = TabController(length: _tabList.length, vsync: this);
+      tabController = TabController(
+        length: _tabList.length,
+        vsync: this,
+        initialIndex: 1, // testing purposes (remove property when done testing)
+      );
       _isInitialized = true;
     }
     super.didChangeDependencies();
@@ -87,25 +91,28 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.of(context).padding;
-    final screenHeight =
-        MediaQuery.of(context).size.height - padding.top - padding.bottom - kToolbarHeight - kBottomNavigationBarHeight;
+    final screenHeight = MediaQuery.of(context).size.height -
+        padding.top -
+        padding.bottom -
+        kToolbarHeight -
+        kBottomNavigationBarHeight;
     return Column(
-        children: [
-          Container(
-            height: screenHeight * 0.3,
-            child: ProfileHeader(
-              controller: tabController,
-              tabList: tabList,
-            ),
+      children: [
+        Container(
+          height: screenHeight * 0.3,
+          child: ProfileHeader(
+            controller: tabController,
+            tabList: tabList,
           ),
-          Container(
-            height: screenHeight * 0.65,
-            child: ProfileBody(
-              controller: tabController,
-              tabList: tabList,
-            ),
+        ),
+        Container(
+          height: screenHeight * 0.65,
+          child: ProfileBody(
+            controller: tabController,
+            tabList: tabList,
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

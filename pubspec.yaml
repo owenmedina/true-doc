@@ -65,7 +65,7 @@ flutter:
     - assets/illustrations/messages/send-message.png
     - assets/illustrations/profile/settings.png
     - assets/illustrations/profile/basic/person.png
-    - assets/illustrations/profile/conditions/virus.png
+    - assets/illustrations/profile/history/medical-history.png
     - assets/illustrations/profile/medication/medical-bag.png
     - assets/illustrations/profile/basic/birthday.png
     - assets/illustrations/profile/basic/gender.png
@@ -75,6 +75,8 @@ flutter:
     - assets/illustrations/profile/basic/blood-type.png
     - assets/illustrations/profile/basic/phone.png
     - assets/illustrations/profile/basic/email.png
+    - assets/illustrations/profile/history/virus.png
+    - assets/illustrations/profile/history/procedure.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './conditions_view.dart';
+import './medical_history_view.dart';
 import './medication_view.dart';
 import './patient_info_view.dart';
 import '../../models/app_user.dart';
@@ -19,8 +19,8 @@ class ProfileBody extends StatelessWidget {
             lastName: null,
           ),
         );
-      case 'Conditions':
-        return ConditionsView();
+      case 'Medical History':
+        return MedicalHistoryView();
       case 'Medication':
         return MedicationView();
     }
@@ -37,7 +37,7 @@ class ProfileBody extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: screenWidth * 0.08,
-        vertical: screenHeight * 0.04,
+        vertical: screenHeight * 0.06,
       ),
       child: TabBarView(
         controller: controller,
@@ -45,7 +45,7 @@ class ProfileBody extends StatelessWidget {
           PatientInfoView(
             Patient(id: null, firstName: null, lastName: null),
           ),
-          ConditionsView(),
+          MedicalHistoryView(),
           MedicationView(),
         ],
       ),

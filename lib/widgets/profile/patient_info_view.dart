@@ -19,11 +19,11 @@ class PatientInfoView extends StatelessWidget {
         TextInfoTile(title: 'Primary Physician', content: 'Dr. First LastName'),
         SizedBox(height: screenHeight * 0.02),
         TextInfoTile(title: 'Blood Type', content: 'A+'),
-        SizedBox(height: screenHeight * 0.04),
+        SizedBox(height: screenHeight * 0.035),
         GridView.count(
           shrinkWrap: true,
           crossAxisCount: 2,
-          childAspectRatio: 5 / 2,
+          childAspectRatio: 6 / 2,
           children: [
             IconInfoTile(
               label: 'August 00, 2020',

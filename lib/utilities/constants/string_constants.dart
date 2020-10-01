@@ -12,6 +12,7 @@ class StringConstants {
   static const errorSendingMessage = 'Message failed to send. Please try again.';
   static const genericErrorTitle = 'Error';
   static const noData = 'No Data';
+  static const noDate = 'No Date';
 
   // Bottom Navigation Bar
   static const conversationsNavBarTitle = 'Conversations';
@@ -39,7 +40,10 @@ class StringConstants {
   // Profile Screen
   static const profileTabTitles = [
     'Basic Info',
-    'Conditions',
+    'Medical History',
     'Medication',
   ];
+  static const illnessesSectionTitle = 'Illnesses';
+  static const proceduresSectionTitle = 'Procedures';
+  static const ongoing = 'Ongoing';
 }
