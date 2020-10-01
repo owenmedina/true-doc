@@ -7,12 +7,21 @@ import '../../utilities/constants/string_constants.dart';
 class MedicalHistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        MedicalHistorySection(SectionType.Illnesses),
-        MedicalHistorySection(SectionType.Procedures),
-      ],
+    final padding = MediaQuery.of(context).padding;
+    final screenHeight =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom;
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      margin: EdgeInsets.symmetric(
+        vertical: screenHeight * 0.06,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          MedicalHistorySection(SectionType.Illnesses),
+          MedicalHistorySection(SectionType.Procedures),
+        ],
+      ),
     );
   }
 }
@@ -31,24 +40,17 @@ class MedicalHistorySection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                sectionType == SectionType.Illnesses
-                    ? StringConstants.illnessesSectionTitle
-                    : StringConstants.proceduresSectionTitle,
-                style: Theme.of(context).primaryTextTheme.headline6.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              SizedBox(width: screenWidth * 0.02),
-            ],
+          Text(
+            sectionType == SectionType.Illnesses
+                ? StringConstants.illnessesSectionTitle
+                : StringConstants.proceduresSectionTitle,
+            style: Theme.of(context).primaryTextTheme.headline6.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           SizedBox(height: screenHeight * 0.02),
           Expanded(child: SectionGrid(sectionType)),
-          //SizedBox(height: screenHeight * 0.02),
         ],
       ),
     );

@@ -14,57 +14,63 @@ class PatientInfoView extends StatelessWidget {
     final screenHeight =
         MediaQuery.of(context).size.height - padding.top - padding.bottom;
     final screenWidth = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        TextInfoTile(title: 'Primary Physician', content: 'Dr. First LastName'),
-        SizedBox(height: screenHeight * 0.02),
-        TextInfoTile(title: 'Blood Type', content: 'A+'),
-        SizedBox(height: screenHeight * 0.035),
-        GridView.count(
-          shrinkWrap: true,
-          crossAxisCount: 2,
-          childAspectRatio: 6 / 2,
-          children: [
-            IconInfoTile(
-              label: 'August 00, 2020',
-              imageName: 'birthday',
-              alignment: MainAxisAlignment.start,
-            ),
-            IconInfoTile(
-              label: 'Male',
-              imageName: 'gender',
-              alignment: MainAxisAlignment.end,
-            ),
-            IconInfoTile(
-              label: '158 cm',
-              imageName: 'height',
-              alignment: MainAxisAlignment.start,
-            ),
-            IconInfoTile(
-              label: '51 kg',
-              imageName: 'weight',
-              alignment: MainAxisAlignment.end,
-            ),
-            // IconInfoTile(label: 'Dr. FirstName LastName', imageName: 'physician'),
-            // IconInfoTile(label: 'A+', imageName: 'blood-type'),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(
-            bottom: screenHeight * 0.02,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: screenHeight * 0.04,
+      ),
+      child: Column(
+        children: [
+          TextInfoTile(
+              title: 'Primary Physician', content: 'Dr. First LastName'),
+          SizedBox(height: screenHeight * 0.02),
+          TextInfoTile(title: 'Blood Type', content: 'A+'),
+          SizedBox(height: screenHeight * 0.035),
+          GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            childAspectRatio: 6 / 2,
+            children: [
+              IconInfoTile(
+                label: 'August 00, 2020',
+                imageName: 'birthday',
+                alignment: MainAxisAlignment.start,
+              ),
+              IconInfoTile(
+                label: 'Male',
+                imageName: 'gender',
+                alignment: MainAxisAlignment.end,
+              ),
+              IconInfoTile(
+                label: '158 cm',
+                imageName: 'height',
+                alignment: MainAxisAlignment.start,
+              ),
+              IconInfoTile(
+                label: '51 kg',
+                imageName: 'weight',
+                alignment: MainAxisAlignment.end,
+              ),
+              // IconInfoTile(label: 'Dr. FirstName LastName', imageName: 'physician'),
+              // IconInfoTile(label: 'A+', imageName: 'blood-type'),
+            ],
           ),
-          child: Divider(),
-        ),
-        IconInfoTile(
-            label: '000-000-0000',
-            imageName: 'phone',
-            alignment: MainAxisAlignment.start),
-        SizedBox(height: screenHeight * 0.02),
-        IconInfoTile(
-            label: 'namename@email.com',
-            imageName: 'email',
-            alignment: MainAxisAlignment.start),
-      ],
+          Container(
+            margin: EdgeInsets.only(
+              bottom: screenHeight * 0.02,
+            ),
+            child: Divider(),
+          ),
+          IconInfoTile(
+              label: '000-000-0000',
+              imageName: 'phone',
+              alignment: MainAxisAlignment.start),
+          SizedBox(height: screenHeight * 0.02),
+          IconInfoTile(
+              label: 'namename@email.com',
+              imageName: 'email',
+              alignment: MainAxisAlignment.start),
+        ],
+      ),
     );
     // return GridView.count(
     //   mainAxisSpacing: 0,

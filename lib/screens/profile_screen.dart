@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       tabController = TabController(
         length: _tabList.length,
         vsync: this,
-        initialIndex: 1, // testing purposes (remove property when done testing)
+        initialIndex: 2, // testing purposes (remove property when done testing)
       );
       _isInitialized = true;
     }

@@ -68,8 +68,8 @@ class MyApp extends StatelessWidget {
             ),
             bodyText1: TextStyle(fontFamily: 'Roboto'),
             bodyText2: TextStyle(
-              fontFamily: 'Roboto',
-              color: AppColors.lightBlue,
+              fontFamily: 'Kumbh-Sans',
+              color: Colors.black,
             ),
           ).apply(
             bodyColor: AppColors.darkBlue,

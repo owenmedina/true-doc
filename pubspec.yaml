@@ -76,7 +76,6 @@ flutter:
     - assets/illustrations/profile/basic/phone.png
     - assets/illustrations/profile/basic/email.png
     - assets/illustrations/profile/history/virus.png
-    - assets/illustrations/profile/history/procedure.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -12,16 +12,17 @@ class Medication {
   });
 }
 
-class PatientMedication {
-  final String id;
+class PatientMedication extends Medication {
+  final String patientMedicationId;
   final String medicationId;
   final String dosage;
   final String frequency;
 
   PatientMedication({
-    @required this.id,
+    @required this.patientMedicationId,
     @required this.medicationId,
+    @required scientificName,
     @required this.dosage,
     @required this.frequency,
-  });
+  }) : super(id: medicationId, scientificName: scientificName);
 }

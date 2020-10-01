@@ -11,4 +11,5 @@ class NumericalConstants {
 
   // Rounded Widgets
   static const standardBorderRadius = 35.00;
+  static const medicationCardRadius = 15.00;
 }
