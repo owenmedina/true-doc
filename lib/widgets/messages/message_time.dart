@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/message.dart';
-import '../utilities/utility_functions.dart';
+import '../../models/message.dart';
+import '../../utilities/utility_functions.dart';
 
 class MessageTime extends StatelessWidget {
   final Message message;

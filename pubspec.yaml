@@ -27,7 +27,7 @@ dependencies:
   firebase_core: ^0.5.0
   firebase_auth: ^0.18.0+1
   cloud_firestore: "^0.14.0+2"
-  jitsi_meet: ^0.4.0
+  jitsi_meet: ^0.4.2
   provider: ^4.3.2+2
   intl: ^0.16.1
 
@@ -53,16 +53,29 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/illustrations/doc-nurse-4.png
-    - assets/illustrations/home.png
-    - assets/illustrations/appointment.png
-    - assets/illustrations/messages.png
-    - assets/illustrations/profile.png
-    - assets/illustrations/active-home.png
-    - assets/illustrations/active-appointment.png
-    - assets/illustrations/active-messages.png
-    - assets/illustrations/active-profile.png
-    - assets/illustrations/send-message.png
+    - assets/illustrations/login/doc-nurse-4.png
+    - assets/illustrations/tabs/home.png
+    - assets/illustrations/tabs/appointment.png
+    - assets/illustrations/tabs/messages.png
+    - assets/illustrations/tabs/profile.png
+    - assets/illustrations/tabs/active-home.png
+    - assets/illustrations/tabs/active-appointment.png
+    - assets/illustrations/tabs/active-messages.png
+    - assets/illustrations/tabs/active-profile.png
+    - assets/illustrations/messages/send-message.png
+    - assets/illustrations/profile/settings.png
+    - assets/illustrations/profile/basic/person.png
+    - assets/illustrations/profile/history/medical-history.png
+    - assets/illustrations/profile/medication/medical-bag.png
+    - assets/illustrations/profile/basic/birthday.png
+    - assets/illustrations/profile/basic/gender.png
+    - assets/illustrations/profile/basic/height.png
+    - assets/illustrations/profile/basic/weight.png
+    - assets/illustrations/profile/basic/physician.png
+    - assets/illustrations/profile/basic/blood-type.png
+    - assets/illustrations/profile/basic/phone.png
+    - assets/illustrations/profile/basic/email.png
+    - assets/illustrations/profile/history/virus.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

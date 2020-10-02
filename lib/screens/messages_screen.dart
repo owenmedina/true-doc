@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/messages_list.dart';
+import '../widgets/messages/messages_list.dart';
 import '../widgets/inputs/message_input.dart';
 
 class MessagesScreen extends StatelessWidget {

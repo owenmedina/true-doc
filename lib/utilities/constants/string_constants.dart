@@ -10,20 +10,12 @@ class StringConstants {
   static const operationNotAllowed = 'Operation is not allowed';
   static const errorOccurred = 'Something went wrong.';
   static const errorSendingMessage = 'Message failed to send. Please try again.';
-  static const genericErrorTitle = "Error";
+  static const genericErrorTitle = 'Error';
+  static const noData = 'No Data';
+  static const noDate = 'No Date';
 
   // Bottom Navigation Bar
   static const conversationsNavBarTitle = 'Conversations';
-
-  // Login Screen
-  static const logIn = 'Log In';
-  static const signUp = 'Sign Up';
-  static const emailAlreadyExists = 'User with this email already exists';
-  static const logInPrompt = 'Already have an account? Login instead.';
-  static const signUpPrompt = 'Sign Up';
-
-  // Home Screen
-  static const homeScreenTitle = 'Home';
 
   // Call Screen
   static const callScreenTitle = 'Make a Call';
@@ -34,4 +26,29 @@ class StringConstants {
 
   // Conversations Screen
   static const conversationsScreenTitle = 'Conversations';
+
+    // Login Screen
+  static const logIn = 'Log In';
+  static const signUp = 'Sign Up';
+  static const emailAlreadyExists = 'User with this email already exists';
+  static const logInPrompt = 'Already have an account? Login instead.';
+  static const signUpPrompt = 'Sign Up';
+
+  // Home Screen
+  static const homeScreenTitle = 'Home';
+
+  // Profile Screen
+  static const profileTabTitles = [
+    'Basic Info',
+    'Medical History',
+    'Medication',
+  ];
+  static const illnessesSectionTitle = 'Illnesses';
+  static const proceduresSectionTitle = 'Procedures';
+  static const ongoing = 'Ongoing';
+  // Medication View
+  static const drugName = 'Drug Name';
+  static const dosage = 'Dosage';
+  static const frequency = 'Frequency';
+  static const prescribedBy = 'Prescribed by';
 }

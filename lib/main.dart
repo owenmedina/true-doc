@@ -67,6 +67,10 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w300,
             ),
             bodyText1: TextStyle(fontFamily: 'Roboto'),
+            bodyText2: TextStyle(
+              fontFamily: 'Kumbh-Sans',
+              color: Colors.black,
+            ),
           ).apply(
             bodyColor: AppColors.darkBlue,
             displayColor: AppColors.darkBlue,

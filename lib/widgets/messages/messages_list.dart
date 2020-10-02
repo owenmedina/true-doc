@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './message_bubble.dart';
-import './message_time.dart';
-import './date_divider.dart';
-import '../models/message.dart';
-import '../services/messages.dart';
+import 'message_bubble.dart';
+import 'message_time.dart';
+import '../date_divider.dart';
+import '../../models/message.dart';
+import '../../services/messages.dart';
 
 class MessagesList extends StatelessWidget {
   final conversationId;
