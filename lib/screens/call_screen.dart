@@ -140,10 +140,6 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CallForm(_submitHandler),
-      ],
-    );
+    return CallForm(_submitHandler);
   }
 }

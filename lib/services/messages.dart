@@ -20,7 +20,12 @@ class Messages {
         .collection('messages')
         .orderBy('date', descending: true);
 
-    return ref.snapshots().map((list) => list.docs.map((doc) {
+    // ref.get().then((value) {
+    //   value.docs.forEach((element) {
+    //     print('data: ${element.data()}');
+    //   });
+    // });
+    final stream = ref.snapshots().map((list) => list.docs.map((doc) {
           var message = Message.fromDocument(doc);
           if (!message.isMe && !message.isRead) {
             message.isRead =
@@ -35,8 +40,12 @@ class Messages {
               'readAt': Timestamp.fromDate(DateTime.now()),
             });
           }
+          print('${list.size}: ${message.toString()}');
           return message;
         }).toList());
+
+    print(stream == null);
+    return stream;
   }
 
   Future<void> sendMessage({

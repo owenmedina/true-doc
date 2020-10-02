@@ -32,9 +32,9 @@ class MessagesScreen extends StatelessWidget {
             ),
           ],
         ),
-        height: screenHeight * 0.16,
+        height: screenHeight * 0.17,
         padding: EdgeInsets.only(
-          top: screenHeight * 0.04,
+          top: screenHeight * 0.05,
           bottom: screenHeight * 0.005,
           right: screenWidth * 0.01,
         ),
