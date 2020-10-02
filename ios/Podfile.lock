@@ -60,8 +60,8 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - jitsi_meet (0.0.1):
     - Flutter
-    - JitsiMeetSDK (= 2.9.3)
-  - JitsiMeetSDK (2.9.3)
+    - JitsiMeetSDK (= 2.10.2)
+  - JitsiMeetSDK (2.10.2)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -127,8 +127,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  jitsi_meet: a755bc87895d7763e3c20dca4351cbaa475b38f4
-  JitsiMeetSDK: 1aa3166bc1eabafdf03941bb3e9d65777fe84205
+  jitsi_meet: ec739208b5a4397e99c951ed3bb56d51b890fec0
+  JitsiMeetSDK: d7612d73befd3f7f51f989458a816bbd05d0bc8e
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 

@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
             bottom: screenSize.height * 0.10,
             left: screenSize.width * 0.10,
             child: Image.asset(
-              'assets/illustrations/profile/doc-nurse-4.png',
+              'assets/illustrations/login/doc-nurse-4.png',
               height: screenSize.height * 0.3,
             ),
           ),

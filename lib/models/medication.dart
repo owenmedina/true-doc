@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 
 class Medication {
   final String id;
-  final String scientificName;
-  final String genericName;
+  final String name;
+  final String prescribedBy;
 
   Medication({
     @required this.id,
-    @required this.scientificName,
-    this.genericName,
+    @required this.name,
+    @required this.prescribedBy,
   });
 }
 
@@ -21,8 +21,10 @@ class PatientMedication extends Medication {
   PatientMedication({
     @required this.patientMedicationId,
     @required this.medicationId,
-    @required scientificName,
+    @required name,
     @required this.dosage,
     @required this.frequency,
-  }) : super(id: medicationId, scientificName: scientificName);
+    @required prescribedBy,
+    genericName,
+  }) : super(id: medicationId, name: name, prescribedBy: prescribedBy,);
 }

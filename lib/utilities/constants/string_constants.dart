@@ -46,4 +46,9 @@ class StringConstants {
   static const illnessesSectionTitle = 'Illnesses';
   static const proceduresSectionTitle = 'Procedures';
   static const ongoing = 'Ongoing';
+  // Medication View
+  static const drugName = 'Drug Name';
+  static const dosage = 'Dosage';
+  static const frequency = 'Frequency';
+  static const prescribedBy = 'Prescribed by';
 }

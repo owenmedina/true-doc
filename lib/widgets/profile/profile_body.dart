@@ -41,35 +41,40 @@ class ProfileBody extends StatelessWidget {
         dosage: '10 mg',
         frequency: 'Every 3rd Wednesday',
         medicationId: null,
-        scientificName: 'Amlodipine',
+        name: 'Amlodipine',
+        prescribedBy: 'Dr. Stephen Strange'
       ),
       PatientMedication(
         patientMedicationId: null,
         dosage: '20 mg',
         frequency: 'Every Morning',
         medicationId: null,
-        scientificName: 'Lisinopril',
+        name: 'Lisinopril',
+        prescribedBy: 'Dr. Stephen Strange'
       ),
       PatientMedication(
         patientMedicationId: null,
         dosage: '90 mcg',
         frequency: 'Every 22nd',
         medicationId: null,
-        scientificName: 'Albuterol',
+        name: 'Albuterol',
+        prescribedBy: 'Dr. Thor Odinson'
       ),
       PatientMedication(
         patientMedicationId: null,
         dosage: '300 mg',
         frequency: 'Twice a Morning',
         medicationId: null,
-        scientificName: 'Gabapentin',
+        name: 'Gabapentin',
+        prescribedBy: 'Dr. Tony Stark'
       ),
       PatientMedication(
         patientMedicationId: null,
         dosage: '40 mg',
         frequency: 'Every Morning',
         medicationId: null,
-        scientificName: 'Omeprazole',
+        name: 'Omeprazole',
+        prescribedBy: 'Dr. Tony Stark'
       ),
     ];
     return Container(
